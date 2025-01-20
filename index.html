@@ -5,21 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Казино</title>
     <style>
+        /* Фоновое изображение на весь экран */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-image: url('D:\Python работы\Python Project5 mini app\files\book-of-ra-deluxe-cms-1440x900.webp'); /* Указываем путь к фоновому изображению */
+            background-size: cover; /* Заполнение фона */
+            background-position: center center; /* Центрирование изображения */
+            background-attachment: fixed; /* Фиксация фона при прокрутке */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        h1 {
-            color: red;
-            font-size: 36px;
-            font-weight: bold;
+        /* Стиль для колеса */
+        .wheel {
+            width: 300px; /* Размер колеса */
+            margin-top: 50px;
+            cursor: pointer; /* Указатель курсора, когда наводим на колесо */
         }
     </style>
 </head>
 <body>
-    <h1>Привет, ты находишься в казино!</h1>
+    <!-- Колесо удачи -->
+    <img class="wheel" src="images1.png" alt="Колесо удачи">
+
+    <script>
+        // Обработчик клика по колесу
+        document.querySelector('.wheel').addEventListener('click', function() {
+            this.style.animation = 'spin 3s ease-out forwards'; // Запуск анимации
+
+            // Остановка анимации на одном из делений через 1.5 секунды
+            setTimeout(function() {
+                // Останавливаем анимацию и добавляем поворот к конечному делению
+                document.querySelector('.wheel').style.animation = 'none';
+                document.querySelector('.wheel').style.transform = 'rotate(2520deg)'; // Остановка на определённом делении
+            }, 1500);
+        });
+
+        // Анимация вращения колеса
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(1440deg); /* Прокрутка на 4 полных оборота */
+            }
+        }
+    </script>
 </body>
 </html>
