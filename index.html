@@ -37,16 +37,70 @@
                 transform: rotate(1440deg); /* Прокрутка на 4 полных оборота */
             }
         }
+
+        /* Стиль модального окна */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s;
+        }
+
+        .modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: Arial, sans-serif;
+        }
+
+        .modal-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .modal-button:hover {
+            background: #218838;
+        }
     </style>
 </head>
 <body>
     <!-- Колесо удачи -->
     <img class="wheel" src="files/images1.png" alt="Колесо удачи">
 
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            Yours won - $200
+            <button class="modal-button" id="closeModal">OK</button>
+        </div>
+    </div>
+
     <script>
         // Обработчик клика по колесу
         document.querySelector('.wheel').addEventListener('click', function() {
             const wheel = this;
+            const modal = document.getElementById('modal');
 
             // Добавляем анимацию
             wheel.style.animation = 'spin 1.5s ease-out';
@@ -55,7 +109,16 @@
             setTimeout(function() {
                 wheel.style.animation = ''; // Сбрасываем анимацию
                 wheel.style.transform = 'rotate(2520deg)'; // Устанавливаем конечный угол
+
+                // Показываем модальное окно
+                modal.classList.add('active');
             }, 1500);
+        });
+
+        // Обработчик закрытия модального окна
+        document.getElementById('closeModal').addEventListener('click', function() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
         });
     </script>
 </body>
