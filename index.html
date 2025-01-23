@@ -9,7 +9,7 @@
             padding: 0;
             height: 100vh;
             overflow: hidden;
-            background: url('files/images3.jpg') no-repeat center center fixed; /* Фон */
+            background: url('files/images4.jpg') no-repeat center center fixed; /* Фон */
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -21,12 +21,12 @@
         /* Кнопка Start */
         .start-button {
             position: absolute;
-            top: 40%; /* Расположение кнопки */
+            top: 30%; /* Подняли выше */
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 450px; /* Увеличенный размер кнопки */
-            animation: pulse 1.5s infinite;
+            width: 600px; /* Сделали крупнее */
             cursor: pointer;
+            animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
@@ -37,33 +37,9 @@
                 transform: translate(-50%, -50%) scale(1.1);
             }
         }
-
-        /* Текст, вылетающий изо рта */
-        .text-bubble {
-            position: absolute;
-            bottom: 20%; /* Расположение текста */
-            left: 40%; /* Ближе к девушке */
-            width: 250px;
-            animation: flyin 1s ease-out forwards;
-            opacity: 0;
-        }
-
-        @keyframes flyin {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Текст -->
-    <img src="files/text.png" alt="Речевой пузырь" class="text-bubble">
-
     <!-- Кнопка START -->
     <img src="files/start.png" alt="Start Button" class="start-button">
 
@@ -76,6 +52,7 @@
     </script>
 </body>
 </html>
+
 
 
 
