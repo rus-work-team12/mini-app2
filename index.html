@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Казино</title>
     <style>
         body {
@@ -24,7 +25,8 @@
             top: 30%; /* Подняли выше */
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 1800px; /* Увеличили размер в 3 раза */
+            max-width: 90%; /* Ограничиваем ширину кнопки, чтобы она не вылазила за пределы экрана */
+            width: 600px; /* Размер кнопки, но ограничен max-width */
             cursor: pointer;
             animation: pulse 1.5s infinite;
         }
@@ -52,6 +54,7 @@
     </script>
 </body>
 </html>
+
 
 
 
