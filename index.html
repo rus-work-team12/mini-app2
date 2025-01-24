@@ -39,9 +39,31 @@
                 transform: translate(-50%, -50%) scale(1.1);
             }
         }
+
+        /* Венок "BIG WIN" правый */
+        .big-win.right {
+            position: absolute;
+            bottom: 15%; /* Рядом с машиной */
+            right: 10%;
+            width: 300px; /* Размер венка */
+            animation: fly-right 3s ease-in-out infinite;
+        }
+
+        /* Анимация для правого венка */
+        @keyframes fly-right {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(30px, -20px);
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Венок "BIG WIN" справа -->
+    <img src="files/win.png" alt="Big Win Right" class="big-win right">
+
     <!-- Кнопка START -->
     <img src="files/start.png" alt="Start Button" class="start-button">
 
@@ -54,6 +76,11 @@
     </script>
 </body>
 </html>
+
+
+
+
+
 
 
 
