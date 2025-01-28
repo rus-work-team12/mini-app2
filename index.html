@@ -10,7 +10,7 @@
             padding: 0;
             height: 100vh;
             overflow: hidden;
-            background: url('files/images4.jpg') no-repeat center center fixed; /* Фон */
+            background: url('files/images4.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -22,41 +22,32 @@
         /* Кнопка Start */
         .start-button {
             position: absolute;
-            top: 30%; /* Подняли выше */
+            top: 30%;
             left: 50%;
             transform: translate(-50%, -50%);
-            max-width: 90%; /* Ограничиваем ширину кнопки, чтобы она не вылазила за пределы экрана */
-            width: 800px; /* Увеличили ширину кнопки */
+            max-width: 90%;
+            width: 800px;
             cursor: pointer;
             animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.1);
-            }
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
         }
 
         /* Венок "BIG WIN" правый */
         .big-win.right {
             position: absolute;
-            bottom: 18%; /* Подняли венок чуть выше */
-            right: 5%; /* Сделали венок ближе к правой части экрана */
-            width: 250px; /* Сделали венок меньше */
+            bottom: 18%;
+            right: 5%;
+            width: 250px;
             animation: fly-right 3s ease-in-out infinite;
         }
 
-        /* Анимация для правого венка */
         @keyframes fly-right {
-            0%, 100% {
-                transform: translate(0, 0);
-            }
-            50% {
-                transform: translate(30px, -30px); /* Сделали немного выше */
-            }
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
         }
     </style>
 </head>
@@ -65,15 +56,8 @@
     <img src="files/win.png" alt="Big Win Right" class="big-win right">
 
     <!-- Кнопка START -->
-    <img src="files/start.png" alt="Start Button" class="start-button">
+    <img src="files/start.png" alt="Start Button" class="start-button" onclick="window.location.href='new_page.html'">
 
-    <script>
-        // Переход на новую белую страницу при нажатии на кнопку START
-        document.querySelector('.start-button').addEventListener('click', () => {
-            document.body.innerHTML = '<div style="height:100vh; display:flex; justify-content:center; align-items:center; font-size:24px;">Новая страница</div>';
-            document.body.style.backgroundColor = "white";
-        });
-    </script>
 </body>
 </html>
 
