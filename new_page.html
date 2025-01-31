@@ -17,11 +17,73 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('files/фон.webp') no-repeat center center fixed;
+            background: url('files/фон2.png') no-repeat center center fixed;
             background-size: cover;
+            position: relative;
         }
+
+        .fortune-wheel {
+            position: absolute;
+            bottom: 10px;
+            left: 55%;
+            z-index: 1;
+            width: 400px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 1.5s ease-out;
+        }
+
+        .man {
+            position: absolute;
+            bottom: 5px;
+            left: 30%;
+            z-index: 2;
+            width: 300px;
+            height: auto;
+        }
+
+        #prize {
+            position: absolute;
+            bottom: 70px;
+            font-size: 24px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none; /* Скрыть по умолчанию */
+        }
+
     </style>
 </head>
 <body>
+
+    <img class="fortune-wheel" id="fortuneWheel" src="files/колесо.png" alt="Wheel of Fortune">
+    <img class="man" src="files/мужик пнг.png" alt="Man">
+    <div id="prize"></div>
+
+    <script>
+        const wheel = document.getElementById('fortuneWheel');
+        const prizeBox = document.getElementById('prize');
+
+        wheel.addEventListener('click', () => {
+            // Генерируем случайное число от 0 до 360 (угол поворота)
+            const randomDegree = Math.floor(Math.random() * 360) + 3600; // 3600 для большего количества оборотов
+            const randomPrize = Math.floor(Math.random() * 100) + 1; // Генерируем случайный выигрыш
+
+            // Добавляем анимацию вращения колеса
+            wheel.style.transition = 'transform 1.5s ease-out';
+            wheel.style.transform = `rotate(${randomDegree}deg)`;
+
+            // Ожидаем завершения анимации
+            setTimeout(() => {
+                prizeBox.style.display = 'block';
+                prizeBox.textContent = `Вы выиграли - ${randomPrize}`;
+            }, 1500); // Тайм-аут должен быть равен длительности анимации
+        });
+    </script>
+
 </body>
 </html>
+
+
+
