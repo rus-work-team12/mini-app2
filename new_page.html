@@ -20,25 +20,27 @@
             background: url('files/фон2.png') no-repeat center center fixed;
             background-size: cover;
             position: relative;
+            overflow: hidden; /* Чтобы не было полос прокрутки */
         }
 
         .fortune-wheel {
             position: absolute;
-            bottom: 10px;
-            left: 55%;
-            z-index: 1;
-            width: 400px;
+            bottom: -80px; /* Опустил колесо немного ниже */
+            right: -10%; /* Подвинул колесо немного левее */
+            z-index: 2; /* Колесо перед мужчиной */
+            width: 450px; /* Сделал колесо немного меньше */
             height: auto;
             cursor: pointer;
-            transition: transform 1.5s ease-out;
+            transition: transform 3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Плавное вращение колеса */
         }
 
         .man {
             position: absolute;
-            bottom: 5px;
-            left: 30%;
-            z-index: 2;
-            width: 300px;
+            bottom: 0; /* Мужчина на самом низу */
+            left: 35%; /* Мужчина немного смещен влево */
+            transform: translateX(-50%); /* Центрируем мужчину */
+            z-index: 1; /* Мужчина позади колеса */
+            width: 250px; /* Размер мужчины */
             height: auto;
         }
 
@@ -50,14 +52,14 @@
             color: white;
             padding: 10px;
             border-radius: 5px;
-            display: none; /* Скрыть по умолчанию */
+            display: none; /* Скрыто по умолчанию */
         }
 
     </style>
 </head>
 <body>
 
-    <img class="fortune-wheel" id="fortuneWheel" src="files/колесо.png" alt="Wheel of Fortune">
+    <img class="fortune-wheel" id="fortuneWheel" src="files/колесо1.png" alt="Wheel of Fortune">
     <img class="man" src="files/мужик пнг.png" alt="Man">
     <div id="prize"></div>
 
@@ -66,24 +68,32 @@
         const prizeBox = document.getElementById('prize');
 
         wheel.addEventListener('click', () => {
-            // Генерируем случайное число от 0 до 360 (угол поворота)
-            const randomDegree = Math.floor(Math.random() * 360) + 3600; // 3600 для большего количества оборотов
-            const randomPrize = Math.floor(Math.random() * 100) + 1; // Генерируем случайный выигрыш
+            // Генерируем случайный угол для вращения
+            const randomDegree = Math.floor(Math.random() * 360) + 3600; // 3600 для множества оборотов
+            const randomPrize = Math.floor(Math.random() * 100) + 1; // Случайный выигрыш
 
-            // Добавляем анимацию вращения колеса
-            wheel.style.transition = 'transform 1.5s ease-out';
+            // Анимация вращения колеса (толкание рукой)
+            wheel.style.transition = 'transform 3s cubic-bezier(0.25, 0.8, 0.25, 1)';
             wheel.style.transform = `rotate(${randomDegree}deg)`;
 
-            // Ожидаем завершения анимации
+            // Показываем выигрыш после завершения анимации
             setTimeout(() => {
                 prizeBox.style.display = 'block';
                 prizeBox.textContent = `Вы выиграли - ${randomPrize}`;
-            }, 1500); // Тайм-аут должен быть равен длительности анимации
+            }, 3000); // Тайм-аут должен быть равен длительности анимации
         });
     </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
 
 
 
