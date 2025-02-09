@@ -26,18 +26,18 @@
         .fortune-wheel {
             position: absolute;
             bottom: -80px; /* Опустил колесо немного ниже */
-            right: -30%; /* Сильно сдвигал колесо вправо */
+            right: -28%; /* Сильно сдвигал колесо вправо */
             z-index: 2; /* Колесо перед мужчиной */
             width: 450px; /* Сделал колесо немного меньше */
             height: auto;
             cursor: pointer;
-            transition: transform 3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Плавное вращение колеса */
+            transition: transform 1s cubic-bezier(0.25, 0.8, 0.25, 1); /* Плавное вращение колеса */
         }
 
         .man {
             position: absolute;
             bottom: 0; /* Мужчина на самом низу */
-            left: 35%; /* Мужчина немного смещен влево */
+            left: 28%; /* Немного сместил мужчину влево */
             transform: translateX(-50%); /* Центрируем мужчину */
             z-index: 1; /* Мужчина позади колеса */
             width: 250px; /* Размер мужчины */
@@ -72,20 +72,25 @@
             const randomDegree = Math.floor(Math.random() * 360) + 3600; // 3600 для множества оборотов
             const randomPrize = Math.floor(Math.random() * 100) + 1; // Случайный выигрыш
 
-            // Анимация вращения колеса (толкание рукой)
-            wheel.style.transition = 'transform 3s cubic-bezier(0.25, 0.8, 0.25, 1)';
+            // Анимация вращения колеса (с случайной длительностью)
+            wheel.style.transition = 'transform 1s cubic-bezier(0.25, 0.8, 0.25, 1)';
             wheel.style.transform = `rotate(${randomDegree}deg)`;
 
             // Показываем выигрыш после завершения анимации
             setTimeout(() => {
                 prizeBox.style.display = 'block';
                 prizeBox.textContent = `Вы выиграли - ${randomPrize}`;
-            }, 3000); // Тайм-аут должен быть равен длительности анимации
+            }, 1000); // Тайм-аут должен быть равен длительности анимации
         });
     </script>
 
 </body>
 </html>
+
+
+
+
+
 
 
 
