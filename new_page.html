@@ -17,7 +17,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('files/фон4.png') no-repeat center center fixed;
+            background: url('files/фон5.png') no-repeat center center fixed;
             background-size: cover;
             position: relative;
             overflow: hidden; /* Чтобы не было полос прокрутки */
@@ -44,63 +44,25 @@
             height: auto;
         }
 
-        #prize {
-            position: absolute;
-            bottom: 70px;
-            font-size: 24px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            display: none; /* Скрыто по умолчанию */
-        }
-
-        .arrow {
-            position: absolute;
-            top: 650px; /* Сильно опустил стрелку вниз */
-            left: 85%; /* Центрируем стрелку */
-            transform: translateX(-50%);
-            z-index: 3; /* Убедитесь, что стрелка выше колеса */
-        }
-
-        .arrow img {
-            width: 45px; /* Увеличенный размер стрелки */
-            height: 45px;
-        }
-
     </style>
 </head>
 <body>
 
-    <!-- Стрелка -->
-    <div class="arrow">
-        <img src="files/стрелка1.png" alt="Arrow">
-    </div>
-
     <img class="fortune-wheel" id="fortuneWheel" src="files/колесо2.png" alt="Wheel of Fortune">
     <img class="man" src="files/мужик пнг.png" alt="Man">
-    <div id="prize"></div>
 
     <script>
         const wheel = document.getElementById('fortuneWheel');
-        const prizeBox = document.getElementById('prize');
 
         wheel.addEventListener('click', () => {
             // Генерируем случайную продолжительность анимации от 1.5 до 2.2 секунд
             const randomDuration = (Math.random() * (2.2 - 1.5) + 1.5).toFixed(2);
             // Генерируем случайный угол для вращения
             const randomDegree = Math.floor(Math.random() * 360) + 3600; // 3600 для множества оборотов
-            const randomPrize = Math.floor(Math.random() * 100) + 1; // Случайный выигрыш
 
             // Анимация вращения колеса (с случайной длительностью)
             wheel.style.transition = `transform ${randomDuration}s cubic-bezier(0.25, 0.8, 0.25, 1)`;
             wheel.style.transform = `rotate(${randomDegree}deg)`;
-
-            // Показываем выигрыш после завершения анимации
-            setTimeout(() => {
-                prizeBox.style.display = 'block';
-                prizeBox.textContent = `Вы выиграли - ${randomPrize}`;
-            }, randomDuration * 1000); // Тайм-аут должен быть равен длительности анимации
         });
     </script>
 
