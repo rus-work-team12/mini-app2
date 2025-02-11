@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Новая страница</title>
+    <title>Казино</title>
     <style>
         * {
             margin: 0;
@@ -20,54 +20,151 @@
             background: url('files/фон6.png') no-repeat center center fixed;
             background-size: cover;
             position: relative;
-            overflow: hidden; /* Чтобы не было полос прокрутки */
+            overflow: hidden;
+            font-family: Arial, sans-serif;
         }
 
         .fortune-wheel {
             position: absolute;
-            bottom: -3px; /* Опустил колесо немного ниже */
-            right: -6%; /* Сильно сдвигал колесо вправо */
-            z-index: 2; /* Колесо перед мужчиной */
-            width: 260px; /* Сделал колесо немного меньше */
+            bottom: -3px;
+            right: -6%;
+            z-index: 2;
+            width: 260px;
             height: auto;
             cursor: pointer;
-            transition: transform 1s cubic-bezier(0.25, 0.8, 0.25, 1); /* Плавное вращение колеса */
+            transition: transform 2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-origin: center;
+            will-change: transform;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            user-select: none;
+            touch-action: manipulation;
         }
 
         .man {
             position: absolute;
-            bottom: 0; /* Мужчина на самом низу */
-            left: 31%; /* Мужчина немного смещен влево */
-            transform: translateX(-50%); /* Центрируем мужчину */
-            z-index: 1; /* Мужчина позади колеса */
-            width: 300px; /* Размер мужчины */
+            bottom: 0;
+            left: 31%;
+            transform: translateX(-50%);
+            z-index: 1;
+            width: 300px;
             height: auto;
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 24px;
+            z-index: 10;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .modal button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background: #ffcc00;
+            color: black;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .modal button:hover {
+            background: #ffdd44;
         }
 
     </style>
 </head>
 <body>
 
+    <!-- Колесо фортуны -->
     <img class="fortune-wheel" id="fortuneWheel" src="files/колесо2.png" alt="Wheel of Fortune">
+
+    <!-- Мужчина -->
     <img class="man" src="files/мужик пнг.png" alt="Man">
+
+    <!-- Модальное окно с результатом -->
+    <div id="winModal" class="modal">
+        <p id="winMessage">You won: <span id="countingWin">0$</span></p>
+        <button onclick="closeModal()">OK</button>
+    </div>
 
     <script>
         const wheel = document.getElementById('fortuneWheel');
+        const winModal = document.getElementById('winModal');
+        const winMessage = document.getElementById('winMessage');
+        const countingWin = document.getElementById('countingWin');
+
+        let currentRotation = 0;
+        let isSpinning = false;
+
+        const winAmounts = ["750$", "1000$", "1250$", "1500$", "1750$", "2000$", "3000$", "3500$", "4000$", "4500$", "5000$", "7500$", "10.000$"];
 
         wheel.addEventListener('click', () => {
-            // Генерируем случайную продолжительность анимации от 1.5 до 2.2 секунд
-            const randomDuration = (Math.random() * (2.2 - 1.5) + 1.5).toFixed(2);
-            // Генерируем случайный угол для вращения
-            const randomDegree = Math.floor(Math.random() * 360) + 3600; // 3600 для множества оборотов
+            if (isSpinning) return;
 
-            // Анимация вращения колеса (с случайной длительностью)
+            isSpinning = true;
+
+            const randomDuration = (Math.random() * (2.7 - 2.2) + 2.2).toFixed(2);
+            const randomDegree = Math.floor(Math.random() * 360) + 3600;
+
+            currentRotation += randomDegree;
+
             wheel.style.transition = `transform ${randomDuration}s cubic-bezier(0.25, 0.8, 0.25, 1)`;
-            wheel.style.transform = `rotate(${randomDegree}deg)`;
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+            setTimeout(() => {
+                isSpinning = false;
+                showWinPopup();
+            }, randomDuration * 1000);
         });
+
+        function showWinPopup() {
+            const randomWin = winAmounts[Math.floor(Math.random() * winAmounts.length)]; // Выбираем случайную сумму
+            let winAmount = parseInt(randomWin.replace(/\D/g, "")); // Преобразуем "1000$" в число 1000
+
+            let currentCount = 0;
+            let speed = Math.ceil(winAmount / 50); // Чем больше сумма, тем дольше идет счетчик
+
+            countingWin.textContent = "0$"; // Сбрасываем перед началом
+
+            winModal.style.display = "block";
+
+            let counter = setInterval(() => {
+                currentCount += speed;
+                if (currentCount >= winAmount) {
+                    clearInterval(counter);
+                    currentCount = winAmount;
+                }
+                countingWin.textContent = currentCount.toLocaleString() + "$";
+            }, 30);
+        }
+
+        function closeModal() {
+            winModal.style.display = "none";
+        }
     </script>
 
 </body>
 </html>
+
+
+
+
+
+
 
 
 

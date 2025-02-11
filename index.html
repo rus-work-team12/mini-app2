@@ -29,6 +29,12 @@
             width: 800px;
             cursor: pointer;
             animation: pulse 1.5s infinite;
+
+            /* Убираем синюю область при нажатии */
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            user-select: none;
+            touch-action: manipulation;
         }
 
         @keyframes pulse {
@@ -60,6 +66,7 @@
 
 </body>
 </html>
+
 
 
 
