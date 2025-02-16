@@ -60,29 +60,62 @@
             transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px 40px;
+            border-radius: 15px;
             text-align: center;
-            font-size: 24px;
+            font-size: 28px;
             z-index: 10;
             width: 80%;
-            max-width: 400px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+            max-width: 500px;
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Анимация появления модального окна */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .modal p {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        #countingWin {
+            font-size: 48px;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
         }
 
         .modal button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            font-size: 18px;
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 22px;
             border: none;
-            background: #ffcc00;
+            background: linear-gradient(145deg, #ffcc00, #ffdd44);
             color: black;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 30px;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .modal button:hover {
-            background: #ffdd44;
+            background: linear-gradient(145deg, #ffdd44, #ffcc00);
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Анимация для кнопки */
+        .modal button:active {
+            transform: scale(0.98);
         }
 
     </style>
@@ -97,8 +130,8 @@
 
     <!-- Модальное окно с результатом -->
     <div id="winModal" class="modal">
-        <p id="winMessage">You won: <span id="countingWin">0$</span></p>
-        <button onclick="closeModal()">OK</button>
+        <p id="winMessage">Вы выиграли: <span id="countingWin">0$</span></p>
+        <button onclick="closeModal()">ОК</button>
     </div>
 
     <script>
@@ -159,6 +192,7 @@
 
 </body>
 </html>
+
 
 
 
