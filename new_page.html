@@ -85,7 +85,7 @@
 
         .modal p {
             font-size: 36px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             font-weight: bold;
         }
 
@@ -118,6 +118,19 @@
             transform: scale(0.98);
         }
 
+        /* Стили для текста в модальном окне */
+        .win-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .win-info span {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
+        }
     </style>
 </head>
 <body>
@@ -130,18 +143,22 @@
 
     <!-- Модальное окно с результатом -->
     <div id="winModal" class="modal">
-        <p id="winMessage">Вы выиграли: <span id="countingWin">0$</span></p>
-        <button onclick="closeModal()">ОК</button>
+        <div class="win-info">
+            <p>Congrats, you've won!</p>
+            <span id="countingWin">0$</span>
+        </div>
+        <button id="actionButton" onclick="handleButtonClick()">OK</button>
     </div>
 
     <script>
         const wheel = document.getElementById('fortuneWheel');
         const winModal = document.getElementById('winModal');
-        const winMessage = document.getElementById('winMessage');
         const countingWin = document.getElementById('countingWin');
+        const actionButton = document.getElementById('actionButton');
 
         let currentRotation = 0;
         let isSpinning = false;
+        let spinCount = 0; // Счётчик прокрутов
 
         const winAmounts = ["750$", "1000$", "1250$", "1500$", "1750$", "2000$", "3000$", "3500$", "4000$", "4500$", "5000$", "7500$", "10.000$"];
 
@@ -149,6 +166,7 @@
             if (isSpinning) return;
 
             isSpinning = true;
+            spinCount++; // Увеличиваем счётчик прокрутов
 
             const randomDuration = (Math.random() * (2.7 - 2.2) + 2.2).toFixed(2);
             const randomDegree = Math.floor(Math.random() * 360) + 3600;
@@ -183,6 +201,16 @@
                 }
                 countingWin.textContent = currentCount.toLocaleString() + "$";
             }, 30);
+        }
+
+        function handleButtonClick() {
+            if (spinCount >= 2) {
+                // После второго прокрута меняем кнопку на "CONTINUE"
+                window.location.href = "https://1wpgjk.com/?p=jyfz"; // Перенаправление по ссылке
+            } else {
+                // Если прокрут был первый, просто закрываем модальное окно
+                closeModal();
+            }
         }
 
         function closeModal() {
