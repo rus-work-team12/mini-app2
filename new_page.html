@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Казино</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,7 +22,27 @@
             background-size: cover;
             position: relative;
             overflow: hidden;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Баланс выше колеса */
+        #balance {
+            position: absolute;
+            top: 655px; /* Подняли выше колеса */
+            left: 320px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(45deg, #f76c6c, #ffcc00);
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        #balance:hover {
+            transform: scale(1.1);
         }
 
         .fortune-wheel {
@@ -51,7 +72,6 @@
             height: auto;
         }
 
-        /* Стили для модального окна */
         .modal {
             display: none;
             position: fixed;
@@ -71,7 +91,6 @@
             animation: fadeIn 0.5s ease-in-out;
         }
 
-        /* Анимация появления модального окна */
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -113,12 +132,10 @@
             box-shadow: 0 6px 12px rgba(255, 255, 255, 0.4);
         }
 
-        /* Анимация для кнопки */
         .modal button:active {
             transform: scale(0.98);
         }
 
-        /* Стили для текста в модальном окне */
         .win-info {
             display: flex;
             flex-direction: column;
@@ -135,13 +152,12 @@
 </head>
 <body>
 
-    <!-- Колесо фортуны -->
+    <div id="balance">Balance: 0$</div>
+
     <img class="fortune-wheel" id="fortuneWheel" src="files/колесо2.png" alt="Wheel of Fortune">
 
-    <!-- Мужчина -->
     <img class="man" src="files/мужик пнг.png" alt="Man">
 
-    <!-- Модальное окно с результатом -->
     <div id="winModal" class="modal">
         <div class="win-info">
             <p>Congrats, you've won!</p>
@@ -155,10 +171,12 @@
         const winModal = document.getElementById('winModal');
         const countingWin = document.getElementById('countingWin');
         const actionButton = document.getElementById('actionButton');
+        const balanceDisplay = document.getElementById('balance');
 
         let currentRotation = 0;
         let isSpinning = false;
-        let spinCount = 0; // Счётчик прокрутов
+        let spinCount = 0;
+        let balance = 0;
 
         const winAmounts = ["750$", "1000$", "1250$", "1500$", "1750$", "2000$", "3000$", "3500$", "4000$", "4500$", "5000$", "7500$", "10.000$"];
 
@@ -166,7 +184,7 @@
             if (isSpinning) return;
 
             isSpinning = true;
-            spinCount++; // Увеличиваем счётчик прокрутов
+            spinCount++;
 
             const randomDuration = (Math.random() * (2.7 - 2.2) + 2.2).toFixed(2);
             const randomDegree = Math.floor(Math.random() * 360) + 3600;
@@ -183,13 +201,13 @@
         });
 
         function showWinPopup() {
-            const randomWin = winAmounts[Math.floor(Math.random() * winAmounts.length)]; // Выбираем случайную сумму
-            let winAmount = parseInt(randomWin.replace(/\D/g, "")); // Преобразуем "1000$" в число 1000
+            const randomWin = winAmounts[Math.floor(Math.random() * winAmounts.length)];
+            let winAmount = parseInt(randomWin.replace(/\D/g, ""));
 
             let currentCount = 0;
-            let speed = Math.ceil(winAmount / 50); // Чем больше сумма, тем дольше идет счетчик
+            let speed = Math.ceil(winAmount / 50);
 
-            countingWin.textContent = "0$"; // Сбрасываем перед началом
+            countingWin.textContent = "0$";
 
             winModal.style.display = "block";
 
@@ -201,14 +219,15 @@
                 }
                 countingWin.textContent = currentCount.toLocaleString() + "$";
             }, 30);
+
+            balance += winAmount;
+            balanceDisplay.textContent = `Balance: ${balance.toLocaleString()}$`;
         }
 
         function handleButtonClick() {
             if (spinCount >= 2) {
-                // После второго прокрута меняем кнопку на "CONTINUE"
-                window.location.href = "https://1wpgjk.com/?p=jyfz"; // Перенаправление по ссылке
+                window.location.href = "https://1wpgjk.com/?p=jyfz";
             } else {
-                // Если прокрут был первый, просто закрываем модальное окно
                 closeModal();
             }
         }
@@ -220,6 +239,8 @@
 
 </body>
 </html>
+
+
 
 
 
